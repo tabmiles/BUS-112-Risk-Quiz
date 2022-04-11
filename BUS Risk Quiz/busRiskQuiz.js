@@ -90,7 +90,7 @@ function iterate(id) {
         opB2.style.backgroundColor = "lightskyblue";
         opB3.style.backgroundColor = "lightskyblue";
         opB4.style.backgroundColor = "lightskyblue";
-        selected = opB1.value;
+        selected = op1.value;
     })
 
     // Show selection for op2
@@ -99,7 +99,7 @@ function iterate(id) {
         opB2.style.backgroundColor = "lightgoldenrodyellow";
         opB3.style.backgroundColor = "lightskyblue";
         opB4.style.backgroundColor = "lightskyblue";
-        selected = opB2.value;
+        selected = op2.value;
     })
 
     // Show selection for op3
@@ -108,7 +108,7 @@ function iterate(id) {
         opB2.style.backgroundColor = "lightskyblue";
         opB3.style.backgroundColor = "lightgoldenrodyellow";
         opB4.style.backgroundColor = "lightskyblue";
-        selected = opB3.value;
+        selected = op3.value;
     })
 
     // Show selection for op4
@@ -117,7 +117,7 @@ function iterate(id) {
         opB2.style.backgroundColor = "lightskyblue";
         opB3.style.backgroundColor = "lightskyblue";
         opB4.style.backgroundColor = "lightgoldenrodyellow";
-        selected = opB4.value;
+        selected = op4.value;
     })
     
 }
@@ -127,7 +127,8 @@ const next = document.getElementsByClassName('next')[0];
 var id = 0;
 
 next.addEventListener("click", () => {
-    console.log("riskTotalVal: "+riskValTotal);
+    riskValTotal += selected;
+    console.log("Current riskTotalVal: "+riskValTotal);
     start = false;
     // Reset button colors
     opB1.style.backgroundColor = "";
