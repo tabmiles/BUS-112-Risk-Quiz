@@ -7,14 +7,13 @@
 </head>
 <body>
     <div class="panel">
-        <div class="result"> <!--Result is here-->
-  
-        </div>
+
         <div class="question-container" id="question"> <!--Question will be printed here-->
             Question goes here.
         </div>
         <div class="option-container"> <!--Answer options will be printed here-->
-            <table>
+            <p id="result">Result here</p>
+            <table id="table">
                 <tr>
                     <th><p class="option" id="op1">Option 1</p></th>
                     <th><p class="option" id="op2">Option 2</p></th>
@@ -31,6 +30,8 @@
         </div>
         <div class="navigation"> <!--Button to go to next question or finish is here-->
             <button class="next">Next</button>
+            <button class="retry">Retry</button>
+            <button class="finish">Finish</button>
         </div>
     </div>
     <script src="busRiskQuiz.js"></script> <!--Javascript file accessed here-->
