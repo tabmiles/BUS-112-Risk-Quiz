@@ -108,17 +108,28 @@ function printResult(val){
     // Hides the options and option buttons
     const table = document.getElementById('table');
     table.style.display = 'none';
+    explainTable.style.display = '';
     next.style.display = 'none';
 
     // Prints an ending message in the "question" section
     result.style.display = '';
     retry.style.display = '';
     const questionArea = document.getElementById('question');
-    questionArea.innerText = "Here is your result:";
+    questionArea.innerText = "You are a _____ risk taker!"; // TODO: make personalized explaination of what level of risk the user is
+
+    // Prints the risk value explainations
+    const ex1 = document.getElementById('explain1');
+    const ex2 = document.getElementById('explain2');
+    const ex3 = document.getElementById('explain3');
+    const ex4 = document.getElementById('explain4');
+    ex1.innerText = "0-15 is ...";
+    ex2.innerText = "16-20 is ...";
+    ex3.innerText = " 21-25 is ...";
+    ex4.innerText = "26-30 is ...";
 
     // Prints the total risk value in the "options" section
     const optionArea = document.getElementById('result');
-    optionArea.innerText = val;
+    optionArea.innerText = "Your score: "+val;
 
     // Set "next" button to be "retry" and get rid of finish button
     finish.style.display = 'none';
@@ -126,6 +137,7 @@ function printResult(val){
     retry.addEventListener("click", () => {
         // Reset values
         retry.style.display = 'none';
+        explainTable.style.display = 'none';
         table.style.display = '';
         next.style.display = '';
         result.style.display = 'none';
@@ -156,6 +168,8 @@ const retry = document.getElementsByClassName('retry')[0];
 retry.style.display = 'none';
 const result = document.getElementById('result');
 result.style.display = 'none';
+const explainTable = document.getElementById('explain');
+explainTable.style.display = 'none';
 
 if (start){
     iterate("0");
