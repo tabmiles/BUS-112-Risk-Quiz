@@ -28,28 +28,10 @@ const Questions = [{
         { text: "jkl", riskVal: 4 }
     ]
 
-},
-{
-    id: 3,
-    q: "ENDING",
-    a: [{ text: "", riskVal: 0 },
-        { text: "", riskVal: 0 },
-        { text: "", riskVal: 0 },
-        { text: "", riskVal: 0 }
-    ]
-
 }
 
 ]
 
-// Set start, risk total value, and result
-var start = true;
-var riskValTotal = 0;
-var result = document.getElementsByClassName("result");
-
-if (start) {
-    iterate("0");
-}
 
 // Iterate
 function iterate(id) {
@@ -82,7 +64,7 @@ function iterate(id) {
     op4.value = Questions[id].a[3].riskVal;
 
     // Set selected value to zero
-    var selected = 0;
+    selected = 0;
 
     // Show selection for op1
     opB1.addEventListener("click", () => {
@@ -119,7 +101,64 @@ function iterate(id) {
         opB4.style.backgroundColor = "lightgoldenrodyellow";
         selected = op4.value;
     })
-    
+}
+
+
+function printResult(val){
+    // Hides the options and option buttons
+    const table = document.getElementById('table');
+    table.style.display = 'none';
+    next.style.display = 'none';
+
+    // Prints an ending message in the "question" section
+    result.style.display = '';
+    retry.style.display = '';
+    const questionArea = document.getElementById('question');
+    questionArea.innerText = "Here is your result:";
+
+    // Prints the total risk value in the "options" section
+    const optionArea = document.getElementById('result');
+    optionArea.innerText = val;
+
+    // Set "next" button to be "retry" and get rid of finish button
+    finish.style.display = 'none';
+    // When this button is pressed, restart quiz
+    retry.addEventListener("click", () => {
+        // Reset values
+        retry.style.display = 'none';
+        table.style.display = '';
+        next.style.display = '';
+        result.style.display = 'none';
+        next.innerHTML = "Next";
+        start = true;
+        id = 0;
+        riskValTotal = 0;
+        iterate("0");
+        // Reset button colors
+        opB1.style.backgroundColor = "";
+        opB2.style.backgroundColor = "";
+        opB3.style.backgroundColor = "";
+        opB4.style.backgroundColor = "";
+    })
+}
+
+
+
+// RUNNING WHAT IS BELOW
+// Set start, risk total value, selected, and result
+var start = true; // makes it run on initial boot up
+var totalQues = Questions.length;
+var riskValTotal = 0;
+var selected = 0;
+const finish = document.getElementsByClassName('finish')[0];
+finish.style.display = 'none';
+const retry = document.getElementsByClassName('retry')[0];
+retry.style.display = 'none';
+const result = document.getElementById('result');
+result.style.display = 'none';
+
+if (start){
+    iterate("0");
 }
 
 // Next button and method
@@ -128,7 +167,7 @@ var id = 0;
 
 next.addEventListener("click", () => {
     riskValTotal += selected;
-    console.log("Current riskTotalVal: "+riskValTotal);
+    console.log("Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
     start = false;
     // Reset button colors
     opB1.style.backgroundColor = "";
@@ -137,41 +176,22 @@ next.addEventListener("click", () => {
     opB4.style.backgroundColor = "";
     
     // If there are still questions to be asked...
-    if (id < 3) {
+    if (id < totalQues) {
         id++;
         iterate(id);
-        console.log("id of question: ", id);
-        if (id == 3){
-            // TODO: clear the css and ONLY show the finish button
-
+        if (id == totalQues-1){
             // Change next button to say finish
-            next.innerHTML = "FINISH";
-
-            // Temporary hiding of everything
-            op1.style.visibility='hidden';
-            op2.style.visibility='hidden';
-            op3.style.visibility='hidden';
-            op4.style.visibility='hidden';
-            opB1.style.visibility='hidden';
-            opB2.style.visibility='hidden';
-            opB3.style.visibility='hidden';
-            opB4.style.visibility='hidden';
+            finish.style.display = '';
+            next.style.display = 'none';
+            // When finish button is hit
         }
-    }else{
-        // TODO: clear all css and text and only show result and retry (next) button
-
-        // Print the result
-        result[0].innerText = riskValTotal;
-        next.innerHTML = "Retry"; //TODO: make this button on click reset the entire quiz
-
-        // Temporary hiding of everything
-        op1.style.visibility='hidden';
-        op2.style.visibility='hidden';
-        op3.style.visibility='hidden';
-        op4.style.visibility='hidden';
-        opB1.style.visibility='hidden';
-        opB2.style.visibility='hidden';
-        opB3.style.visibility='hidden';
-        opB4.style.visibility='hidden';
+    }else{ 
+        document.write("ERROR");
     }
+})
+
+finish.addEventListener("click", () => {
+    riskValTotal += selected;
+    console.log("LAST Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
+    printResult(riskValTotal);
 })
