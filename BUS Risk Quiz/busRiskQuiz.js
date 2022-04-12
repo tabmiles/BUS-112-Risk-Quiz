@@ -47,17 +47,17 @@ function nextBut(){
         opB3.style.backgroundColor = "";
         opB4.style.backgroundColor = "";
         
-        // If there are still questions to be asked...
-        if (id < totalQues) {
+        if (id < totalQues) { // If there are still questions to be asked...
+            // Go to next question
             id++;
             iterate(id);
-            if (id == totalQues-1){
-                // Change next button to say finish
+            if (id == totalQues-1){ // If current question is the last question...
+                // Show finish button
                 finish.style.display = '';
                 next.style.display = 'none';
             }
         }else{ 
-            document.write("ERROR");
+            document.write("ERROR"); // Checking if there is some random error
         }
     }
 }
@@ -169,6 +169,7 @@ function iterate(id) {
     })
 }
 
+// Logic to determine what user's financial risk tolerance
 function getResult(val){
     var result;
     if (val <= 18){
@@ -182,6 +183,7 @@ function getResult(val){
     }else if(33 <= val){
         result = "You have a high risk tolerance (ie. aggresive investor!";
     }
+    // Return the string of result to be posted on page
     return result;
 }
 
@@ -223,13 +225,13 @@ function printResult(val){
 
 // *** AUTOMATICALLY RUNNING WHAT IS BELOW ***
 
-// Set start, risk total value, selected, and result
+// Initialize: start, length of questions (how many questions), risk total value, selected value, and result
 var start = true; // makes it run on initial boot up
 var totalQues = Questions.length;
 var riskValTotal = 0;
 var selected = 0;
 var id = 0;
-// Grab the finish, next, and restart buttons, the result text, and explanation table
+// Grab the finish + next + restart buttons, the result text, and explanation table
 const finish = document.getElementsByClassName('finish')[0];
 const restart = document.getElementsByClassName('restart')[0];
 const next = document.getElementsByClassName('next')[0];
@@ -240,15 +242,16 @@ finish.style.display = 'none';
 result.style.display = 'none';
 explainTable.style.display = 'none';
 
+// To start on initial boot
 if (start){
     iterate("0");
 }
 
-// Advance to next question
+// When next button is clicked, advance to next question
 next.addEventListener("click", nextBut);
 
-// When finish button is hit, go to last page
+// When finish button is clicked, go to last page with results
 finish.addEventListener("click", finishBut);
 
-// When this button is pressed, restart quiz
+// When this button is clicked, restart quiz
 restart.addEventListener("click", restartBut);
