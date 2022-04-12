@@ -1,11 +1,11 @@
 // Questions that will be asked
 const Questions = [{
     id: 0,
-    q: "Question one",
-    a: [{ text: "A", riskVal: 1 },
-        { text: "B", riskVal: 2 },
-        { text: "C", riskVal: 3 },
-        { text: "D", riskVal: 4 }
+    q: "In general, how would your best friend describe you as a risk taker?",
+    a: [{ text: "A real gambler", riskVal: 4 },
+        { text: "Willing to take risks after completing adequate research", riskVal: 3 },
+        { text: "Cautious", riskVal: 2 },
+        { text: "A real risk avoider", riskVal: 1 }
     ]
 
 },
@@ -32,6 +32,72 @@ const Questions = [{
 
 ]
 
+// What happens when you click on next button
+function nextBut(){
+    if(selected == 0){ // If there is no selection, repeat same question
+        alert("Please choose an option");
+        iterate(id);
+    }else{
+        // Add the selected value
+        riskValTotal += selected;
+        start = false;
+        // Reset button colors
+        opB1.style.backgroundColor = "";
+        opB2.style.backgroundColor = "";
+        opB3.style.backgroundColor = "";
+        opB4.style.backgroundColor = "";
+        
+        // If there are still questions to be asked...
+        if (id < totalQues) {
+            id++;
+            iterate(id);
+            if (id == totalQues-1){
+                // Change next button to say finish
+                finish.style.display = '';
+                next.style.display = 'none';
+            }
+        }else{ 
+            document.write("ERROR");
+        }
+    }
+}
+
+// What happens when you click on restart button
+function restartBut(){
+    // Reset values
+    start = true;
+    id = 0;
+    riskValTotal = 0;
+    // Make explanation table and result/finish buttons hide
+    explainTable.style.display = 'none';
+    result.style.display = 'none';
+    finish.style.display = 'none';
+    // Make the option table and next button show
+    table.style.display = '';
+    next.style.display = '';
+    // Start with first question
+    iterate("0");
+    // Reset button colors
+    opB1.style.backgroundColor = "";
+    opB2.style.backgroundColor = "";
+    opB3.style.backgroundColor = "";
+    opB4.style.backgroundColor = "";
+}
+
+// What happens when you click on finish button
+function finishBut(){
+    if(selected == 0){ // If there is no selection, repeat same question
+        alert("Please choose an option");
+        iterate(id);
+    }else{
+        // Hide the button
+        finish.style.display = 'none';
+        // Add last question value
+        riskValTotal += selected;
+        // Print the result
+        printResult(riskValTotal);
+    }
+}
 
 // Iterate
 function iterate(id) {
@@ -163,9 +229,9 @@ var totalQues = Questions.length;
 var riskValTotal = 0;
 var selected = 0;
 var id = 0;
-// Grab the finish, next, and retry buttons, the result text, and explanation table
+// Grab the finish, next, and restart buttons, the result text, and explanation table
 const finish = document.getElementsByClassName('finish')[0];
-const retry = document.getElementsByClassName('retry')[0];
+const restart = document.getElementsByClassName('restart')[0];
 const next = document.getElementsByClassName('next')[0];
 const result = document.getElementById('result');
 const explainTable = document.getElementById('explain');
@@ -178,68 +244,11 @@ if (start){
     iterate("0");
 }
 
-next.addEventListener("click", () => {
-    if(selected == 0){ // If there is no selection, repeat same question
-        alert("Please choose an option");
-        iterate(id);
-    }else{
-        riskValTotal += selected;
-        console.log("Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
-        start = false;
-        // Reset button colors
-        opB1.style.backgroundColor = "";
-        opB2.style.backgroundColor = "";
-        opB3.style.backgroundColor = "";
-        opB4.style.backgroundColor = "";
-        
-        // If there are still questions to be asked...
-        if (id < totalQues) {
-            id++;
-            iterate(id);
-            if (id == totalQues-1){
-                // Change next button to say finish
-                finish.style.display = '';
-                next.style.display = 'none';
-            }
-        }else{ 
-            document.write("ERROR");
-        }
-    }
-})
+// Advance to next question
+next.addEventListener("click", nextBut);
 
 // When finish button is hit, go to last page
-finish.addEventListener("click", () => {
-    if(selected == 0){ // If there is no selection, repeat same question
-        alert("Please choose an option");
-        iterate(id);
-    }else{
-        // Hide the button
-        finish.style.display = 'none';
-        // Add last question value
-        riskValTotal += selected;
-        // Print the result
-        printResult(riskValTotal);
-    }
-})
+finish.addEventListener("click", finishBut);
 
 // When this button is pressed, restart quiz
-retry.addEventListener("click", () => {
-    // Reset values
-    start = true;
-    id = 0;
-    riskValTotal = 0;
-    // Make explanation table and result/finish buttons hide
-    explainTable.style.display = 'none';
-    result.style.display = 'none';
-    finish.style.display = 'none';
-    // Make the option table and next button show
-    table.style.display = '';
-    next.style.display = '';
-    // Start with first question
-    iterate("0");
-    // Reset button colors
-    opB1.style.backgroundColor = "";
-    opB2.style.backgroundColor = "";
-    opB3.style.backgroundColor = "";
-    opB4.style.backgroundColor = "";
-})
+restart.addEventListener("click", restartBut);
