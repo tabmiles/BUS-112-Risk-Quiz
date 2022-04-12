@@ -1,7 +1,7 @@
 // Questions that will be asked
 const Questions = [{
     id: 0,
-    q: "Question one?",
+    q: "Question one",
     a: [{ text: "A", riskVal: 1 },
         { text: "B", riskVal: 2 },
         { text: "C", riskVal: 3 },
@@ -11,7 +11,7 @@ const Questions = [{
 },
 {
     id: 1,
-    q: "Question Two?",
+    q: "Question Two",
     a: [{ text: "1", riskVal: 1 },
         { text: "2", riskVal: 2 },
         { text: "3", riskVal: 3 },
@@ -21,7 +21,7 @@ const Questions = [{
 },
 {
     id: 2,
-    q: "Question Three?",
+    q: "Question Three",
     a: [{ text: "abc", riskVal: 1 },
         { text: "def", riskVal: 2 },
         { text: "ghi", riskVal: 3 },
@@ -103,6 +103,22 @@ function iterate(id) {
     })
 }
 
+function getResult(val){
+    var result;
+    if (val <= 18){
+        result = "You have a low risk tolerance (ie. conservative investor)!";
+    }else if(19 <= val <= 22){
+        result = "You have a below-average risk tolerance!";
+    }else if(23 <= val <= 28){
+        result = "You have an average/moderate risk tolerance!";
+    }else if(29 <= val <= 32){
+        result = "You have a above-average risk tolerance!";
+    }else if(33 <= val){
+        result = "You have a high risk tolerance (ie. aggresive investor!";
+    }
+    return result;
+}
+
 
 function printResult(val){
     // Hides the options and option buttons
@@ -115,17 +131,20 @@ function printResult(val){
     result.style.display = '';
     retry.style.display = '';
     const questionArea = document.getElementById('question');
-    questionArea.innerText = "You are a _____ risk taker!"; // TODO: make personalized explaination of what level of risk the user is
+    var resultText = getResult(val);
+    questionArea.innerText = resultText;
 
     // Prints the risk value explainations
     const ex1 = document.getElementById('explain1');
     const ex2 = document.getElementById('explain2');
     const ex3 = document.getElementById('explain3');
     const ex4 = document.getElementById('explain4');
-    ex1.innerText = "0-15 is ...";
-    ex2.innerText = "16-20 is ...";
-    ex3.innerText = " 21-25 is ...";
-    ex4.innerText = "26-30 is ...";
+    const ex5 = document.getElementById('explain5');
+    ex1.innerText = "18 or below is low risk tolerance (ie. conservative investor)";
+    ex2.innerText = "19-22 is below-average risk tolerance";
+    ex3.innerText = "23-28 is average/modreate risk tolerance";
+    ex4.innerText = "29-32 is above-average risk tolerance";
+    ex5.innerText = "33 or above is high risk tolerance (ie. aggrssive investor)";
 
     // Prints the total risk value in the "options" section
     const optionArea = document.getElementById('result');
@@ -180,32 +199,43 @@ const next = document.getElementsByClassName('next')[0];
 var id = 0;
 
 next.addEventListener("click", () => {
-    riskValTotal += selected;
-    console.log("Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
-    start = false;
-    // Reset button colors
-    opB1.style.backgroundColor = "";
-    opB2.style.backgroundColor = "";
-    opB3.style.backgroundColor = "";
-    opB4.style.backgroundColor = "";
-    
-    // If there are still questions to be asked...
-    if (id < totalQues) {
-        id++;
+    if(selected == 0){
+        alert("Please choose an option");
+        console.log(id);
         iterate(id);
-        if (id == totalQues-1){
-            // Change next button to say finish
-            finish.style.display = '';
-            next.style.display = 'none';
-            // When finish button is hit
+    }else{
+        riskValTotal += selected;
+        console.log("Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
+        start = false;
+        // Reset button colors
+        opB1.style.backgroundColor = "";
+        opB2.style.backgroundColor = "";
+        opB3.style.backgroundColor = "";
+        opB4.style.backgroundColor = "";
+        
+        // If there are still questions to be asked...
+        if (id < totalQues) {
+            id++;
+            iterate(id);
+            if (id == totalQues-1){
+                // Change next button to say finish
+                finish.style.display = '';
+                next.style.display = 'none';
+                // When finish button is hit
+            }
+        }else{ 
+            document.write("ERROR");
         }
-    }else{ 
-        document.write("ERROR");
     }
 })
 
 finish.addEventListener("click", () => {
-    riskValTotal += selected;
-    console.log("LAST Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
-    printResult(riskValTotal);
+    if(selected == 0){
+        alert("Please choose an option");
+        iterate(id);
+    }else{
+        riskValTotal += selected;
+        console.log("LAST Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
+        printResult(riskValTotal);
+    }
 })
