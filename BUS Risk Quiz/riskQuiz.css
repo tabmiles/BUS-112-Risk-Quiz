@@ -18,7 +18,7 @@ body{
     padding: 5px;
     width: 80vw;
     height: 5vh;
-    background-color: lightskyblue;
+    background-color: rgb(160, 218, 255);
     font-size: x-large;
     text-align: center;
       
@@ -41,6 +41,6 @@ table{
 
 .option{    
     font-size: larger;
-    background-color: lightskyblue;
+    background-color: rgb(160, 218, 255);
     border-radius: 25%;
 }
