@@ -126,10 +126,10 @@ function printResult(val){
     table.style.display = 'none';
     explainTable.style.display = '';
     next.style.display = 'none';
+    finish.display = 'none';
 
     // Prints an ending message in the "question" section
     result.style.display = '';
-    retry.style.display = '';
     const questionArea = document.getElementById('question');
     var resultText = getResult(val);
     questionArea.innerText = resultText;
@@ -150,58 +150,37 @@ function printResult(val){
     const optionArea = document.getElementById('result');
     optionArea.innerText = "Your score: "+val;
 
-    // Set "next" button to be "retry" and get rid of finish button
+    // Get rid of finish button
     finish.style.display = 'none';
-    // When this button is pressed, restart quiz
-    retry.addEventListener("click", () => {
-        // Reset values
-        retry.style.display = 'none';
-        explainTable.style.display = 'none';
-        table.style.display = '';
-        next.style.display = '';
-        result.style.display = 'none';
-        next.innerHTML = "Next";
-        start = true;
-        id = 0;
-        riskValTotal = 0;
-        iterate("0");
-        // Reset button colors
-        opB1.style.backgroundColor = "";
-        opB2.style.backgroundColor = "";
-        opB3.style.backgroundColor = "";
-        opB4.style.backgroundColor = "";
-    })
 }
 
 
+// *** AUTOMATICALLY RUNNING WHAT IS BELOW ***
 
-// RUNNING WHAT IS BELOW
 // Set start, risk total value, selected, and result
 var start = true; // makes it run on initial boot up
 var totalQues = Questions.length;
 var riskValTotal = 0;
 var selected = 0;
+var id = 0;
+// Grab the finish, next, and retry buttons, the result text, and explanation table
 const finish = document.getElementsByClassName('finish')[0];
-finish.style.display = 'none';
 const retry = document.getElementsByClassName('retry')[0];
-retry.style.display = 'none';
+const next = document.getElementsByClassName('next')[0];
 const result = document.getElementById('result');
-result.style.display = 'none';
 const explainTable = document.getElementById('explain');
+// Hide result text, finish button, and explanation table
+finish.style.display = 'none';
+result.style.display = 'none';
 explainTable.style.display = 'none';
 
 if (start){
     iterate("0");
 }
 
-// Next button and method
-const next = document.getElementsByClassName('next')[0];
-var id = 0;
-
 next.addEventListener("click", () => {
-    if(selected == 0){
+    if(selected == 0){ // If there is no selection, repeat same question
         alert("Please choose an option");
-        console.log(id);
         iterate(id);
     }else{
         riskValTotal += selected;
@@ -221,7 +200,6 @@ next.addEventListener("click", () => {
                 // Change next button to say finish
                 finish.style.display = '';
                 next.style.display = 'none';
-                // When finish button is hit
             }
         }else{ 
             document.write("ERROR");
@@ -229,13 +207,39 @@ next.addEventListener("click", () => {
     }
 })
 
+// When finish button is hit, go to last page
 finish.addEventListener("click", () => {
-    if(selected == 0){
+    if(selected == 0){ // If there is no selection, repeat same question
         alert("Please choose an option");
         iterate(id);
     }else{
+        // Hide the button
+        finish.style.display = 'none';
+        // Add last question value
         riskValTotal += selected;
-        console.log("LAST Current riskTotalVal: "+riskValTotal+" Current id: "+ id);
+        // Print the result
         printResult(riskValTotal);
     }
+})
+
+// When this button is pressed, restart quiz
+retry.addEventListener("click", () => {
+    // Reset values
+    start = true;
+    id = 0;
+    riskValTotal = 0;
+    // Make explanation table and result/finish buttons hide
+    explainTable.style.display = 'none';
+    result.style.display = 'none';
+    finish.style.display = 'none';
+    // Make the option table and next button show
+    table.style.display = '';
+    next.style.display = '';
+    // Start with first question
+    iterate("0");
+    // Reset button colors
+    opB1.style.backgroundColor = "";
+    opB2.style.backgroundColor = "";
+    opB3.style.backgroundColor = "";
+    opB4.style.backgroundColor = "";
 })
