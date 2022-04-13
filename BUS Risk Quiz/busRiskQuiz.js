@@ -74,12 +74,22 @@ function nextFunc(){
             break;
         }
     }
+
+    if (id>=1){ // If past first question ...
+        //Show: previous button
+        previous.style.display = '';
+    }
+
     if(id==(totalQues-1)){ // If on the last question ...
         // Hide: next button
         next.style.display = 'none';
         // Show: finish button
         finish.style.display = '';
     }
+}
+
+function previousFunc(){
+    // TODO: implement
 }
 
 function finishFunc(){
@@ -102,6 +112,7 @@ function finishFunc(){
     form[0].style.display = 'none';
     finish.style.display = 'none';
     start_container[0].style.display = 'none';
+    previous.style.display = 'none';
 
     // Show: end-container
     const end = document.getElementsByClassName('end-container');
@@ -140,6 +151,7 @@ function restartFunc(){
     const end = document.getElementsByClassName('end-container');
     end[0].style.display = 'none';
     finish.style.display = 'none';
+    previous.style.display = 'none';
 
     // Start from first question
     iterate("0");
@@ -161,6 +173,7 @@ function iterate(id){
     op2.innerText = Questions[id].a[1].text;
     op3.innerText = Questions[id].a[2].text;
     op4.innerText = Questions[id].a[3].text;
+    
     // Provide new values for options
     op1.value = Questions[id].a[0].riskVal;
     op2.value = Questions[id].a[1].riskVal;
@@ -181,6 +194,7 @@ var totalQues = Questions.length;
 const finish = document.getElementById('finish');
 const restart = document.getElementById('restart');
 const next = document.getElementById('next');
+const previous = document.getElementById('previous');
 const start_container = document.getElementsByClassName('start-container');
 
 // Hide: finish button
@@ -197,10 +211,14 @@ if (start){
     const end = document.getElementsByClassName('end-container');
     end[0].style.display = 'none';
     restart.style.display = 'none';
+    previous.style.display = 'none';
 }
 
 // When next button is clicked, advance to next question
 next.addEventListener("click", nextFunc);
+
+// When previous button is clicked, go back to next question
+previous.addEventListener("click", previousFunc);
 
 // When finish button is clicked, go to last page with results
 finish.addEventListener("click", finishFunc);
