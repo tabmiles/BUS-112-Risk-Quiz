@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: Verdana, sans-serif;
 }
 
 .start-container{
@@ -27,6 +28,8 @@
     font-size: 25px;
     text-align: center;
     grid-row: 1;
+    font-weight: bold;
+    font-family: Georgia, serif;
 }
 
 .form-container{
@@ -45,4 +48,5 @@
 
 button{
     font-size: 20px;
+    font-family: monospace, sans-serif;
 }
