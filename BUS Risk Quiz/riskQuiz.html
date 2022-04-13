@@ -2,47 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BUS 112 Risk Quiz</title>
-    <link rel="stylesheet" href="riskQuiz.css"> <!--CSS file access here-->
+    <title>BUS 112 Risk Quiz 2</title>
+    <link rel="stylesheet" href="riskQuiz.css"> <!-- CSS file access here-->
 </head>
 <body>
-    <div class="panel">
+    <!--Contains the starting screne-->
+    <div class = "start-container">
+        <p class="header">BUS 112 Risk Tolerance Assesment</p>
+    </div> <!--End start-container-->
 
-        <div class="question-container" id="question"> <!--Question will be printed here-->
-            Question goes here.
-        </div>
-        <div class="option-container"> <!--Answer options will be printed here-->
-            <p id="result">Result here</p><br> <!--Result will be printed here-->
-            <table id="explain">
-                <tr>
-                    <th><p id="explain1"></p></th>
-                    <th><p id="explain2"></p></th>
-                    <th><p id="explain3"></p></th>
-                    <th><p id="explain4"></p></th>
-                    <th><p id="explain5"></p></th>
-                </tr>
-            </table>
-            <table id="table">
-                <tr>
-                    <th><p class="option" id="op1">Option 1</p></th>
-                    <th><p class="option" id="op2">Option 2</p></th>
-                    <th><p class="option" id="op3">Option 3</p></th>
-                    <th><p class="option" id="op4">Option 4</p></th>
-                </tr>
-                <tr>
-                    <td><button class="optionButton" id="opB1">a</button></td>
-                    <td><button class="optionButton" id="opB2">b</button></td>
-                    <td><button class="optionButton" id="opB3">c</button></td>
-                    <td><button class="optionButton" id="opB4">d</button></td>
-                </tr>
-            </table>
-        </div>
-        <div class="navigation"> <!--Button to go to next question or finish is here-->
-            <button class="restart">Restart</button>
-            <button class="next">Next</button>
-            <button class="finish">Finish</button>
-        </div>
-    </div>
-    <script src="busRiskQuiz.js"></script> <!--Javascript file accessed here-->
+    <!--Contains the ending/result screne-->
+    <div class = "end-container">
+        <u><p class="header" id="resultHeader">RESULT HERE</p></u>
+        <b><p class="line" id="riskScore"></p></b>
+        <p class="line" id="explain1"></p>
+        <p class="line" id="explain2"></p>
+        <p class="line" id="explain3"></p>
+        <p class="line" id="explain4"></p>
+        <p class="line" id="explain5"></p>
+    </div> <!--End end-container-->
+
+    <!--Contains the question and answer options-->
+    <div class = "form-container">
+        <p class = "header" id="question">QUESTION</p>
+        <form>
+            <input type="radio" name = "options" id="1" value="">
+            <label for="1" class = "line" id="op1">OPTION 1</label><br>
+            <input type="radio" name = "options" id="2" value="">
+            <label for="2" class = "line" id="op2">OPTION 2</label><br>
+            <input type="radio" name = "options" id="3" value="">
+            <label for="3" class = "line" id="op3">OPTION 3</label><br>
+            <input type="radio" name = "options" id="4" value="">
+            <label for="4" class = "line" id="op4">OPTION 4</label><br>
+        </form>
+    </div> <!--End form-container-->
+
+    <!--Contains the navigation buttons-->
+    <div class="navigation-container">
+        <button id="restart">Restart</button>
+        <button id="next">Next</button>
+        <button id="finish">Finish</button>
+    </div> <!--End navigation-container-->
+
+    <script src="riskQuiz.js"></script> <!--Javascript file accessed here-->
 </body>
 </html>
