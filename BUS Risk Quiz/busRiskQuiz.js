@@ -7,7 +7,6 @@ const Questions = [{
         { text: "Cautious", riskVal: 2 },
         { text: "A real risk avoider", riskVal: 1 }
     ]
-
 },
 {
     id: 1,
@@ -17,7 +16,6 @@ const Questions = [{
         { text: "3", riskVal: 3 },
         { text: "4", riskVal: 4 }
     ]
-
 },
 {
     id: 2,
@@ -27,150 +25,9 @@ const Questions = [{
         { text: "ghi", riskVal: 3 },
         { text: "jkl", riskVal: 4 }
     ]
+}] // End of Questions
 
-}
-
-]
-
-// What happens when you click on next button
-function nextBut(){
-    if(selected == 0){ // If there is no selection, repeat same question
-        alert("Please choose an option");
-        iterate(id);
-    }else{
-        // Add the selected value
-        riskValTotal += selected;
-        start = false;
-        // Reset button colors
-        opB1.style.backgroundColor = "";
-        opB2.style.backgroundColor = "";
-        opB3.style.backgroundColor = "";
-        opB4.style.backgroundColor = "";
-        
-        if (id < totalQues) { // If there are still questions to be asked...
-            // Go to next question
-            id++;
-            iterate(id);
-            if (id == totalQues-1){ // If current question is the last question...
-                // Show finish button
-                finish.style.display = '';
-                next.style.display = 'none';
-            }
-        }else{ 
-            document.write("ERROR"); // Checking if there is some random error
-        }
-    }
-}
-
-// What happens when you click on restart button
-function restartBut(){
-    // Reset values
-    start = true;
-    id = 0;
-    riskValTotal = 0;
-    // Make explanation table and result/finish buttons hide
-    explainTable.style.display = 'none';
-    result.style.display = 'none';
-    finish.style.display = 'none';
-    // Make the option table and next button show
-    table.style.display = '';
-    next.style.display = '';
-    // Start with first question
-    iterate("0");
-    // Reset button colors
-    opB1.style.backgroundColor = "";
-    opB2.style.backgroundColor = "";
-    opB3.style.backgroundColor = "";
-    opB4.style.backgroundColor = "";
-}
-
-// What happens when you click on finish button
-function finishBut(){
-    if(selected == 0){ // If there is no selection, repeat same question
-        alert("Please choose an option");
-        iterate(id);
-    }else{
-        // Hide the button
-        finish.style.display = 'none';
-        // Add last question value
-        riskValTotal += selected;
-        // Print the result
-        printResult(riskValTotal);
-    }
-}
-
-// Iterate
-function iterate(id) {
-    // Getting the question and setting it's text
-    const question = document.getElementById("question");
-    question.innerText = Questions[id].q;
-
-    // Getting the options
-    const op1 = document.getElementById('op1');
-    const op2 = document.getElementById('op2');
-    const op3 = document.getElementById('op3');
-    const op4 = document.getElementById('op4');
-    // Getting the buttons
-    const opB1 = document.getElementById('opB1');
-    const opB2 = document.getElementById('opB2');
-    const opB3 = document.getElementById('opB3');
-    const opB4 = document.getElementById('opB4');
-
-
-    // Providing option text 
-    op1.innerText = Questions[id].a[0].text;
-    op2.innerText = Questions[id].a[1].text;
-    op3.innerText = Questions[id].a[2].text;
-    op4.innerText = Questions[id].a[3].text;
-
-    // Providing the value to the options
-    op1.value = Questions[id].a[0].riskVal;
-    op2.value = Questions[id].a[1].riskVal;
-    op3.value = Questions[id].a[2].riskVal;
-    op4.value = Questions[id].a[3].riskVal;
-
-    // Set selected value to zero
-    selected = 0;
-
-    // Show selection for op1
-    opB1.addEventListener("click", () => {
-        opB1.style.backgroundColor = "lightgoldenrodyellow";
-        opB2.style.backgroundColor = "lightskyblue";
-        opB3.style.backgroundColor = "lightskyblue";
-        opB4.style.backgroundColor = "lightskyblue";
-        selected = op1.value;
-    })
-
-    // Show selection for op2
-    opB2.addEventListener("click", () => {
-        opB1.style.backgroundColor = "lightskyblue";
-        opB2.style.backgroundColor = "lightgoldenrodyellow";
-        opB3.style.backgroundColor = "lightskyblue";
-        opB4.style.backgroundColor = "lightskyblue";
-        selected = op2.value;
-    })
-
-    // Show selection for op3
-    opB3.addEventListener("click", () => {
-        opB1.style.backgroundColor = "lightskyblue";
-        opB2.style.backgroundColor = "lightskyblue";
-        opB3.style.backgroundColor = "lightgoldenrodyellow";
-        opB4.style.backgroundColor = "lightskyblue";
-        selected = op3.value;
-    })
-
-    // Show selection for op4
-    opB4.addEventListener("click", () => {
-        opB1.style.backgroundColor = "lightskyblue";
-        opB2.style.backgroundColor = "lightskyblue";
-        opB3.style.backgroundColor = "lightskyblue";
-        opB4.style.backgroundColor = "lightgoldenrodyellow";
-        selected = op4.value;
-    })
-}
-
-// Logic to determine what user's financial risk tolerance
-function getResult(val){
+function evaluateRisk(val){
     var result;
     if (val <= 18){
         result = "You have a low risk tolerance (ie. conservative investor)!";
@@ -187,20 +44,74 @@ function getResult(val){
     return result;
 }
 
+function nextFunc(){
+    if (start){ // If currently at first scene ...
+        start = false;
+        // Hide: start-container
+        start_container[0].style.display = 'none';
+        // Show option-container
+        const form = document.getElementsByClassName('form-container');
+        form[0].style.display = '';
+        restart.style.display = '';
+        // Update next button to say "Next"
+        next.innerText = "Next";
+        // Do first question
+        iterate("0");
+    }
 
-function printResult(val){
-    // Hides the options and option buttons
-    const table = document.getElementById('table');
-    table.style.display = 'none';
-    explainTable.style.display = '';
-    next.style.display = 'none';
-    finish.display = 'none';
+    // Check to make sure an option is chosen
+    const radioButtons = document.querySelectorAll('input[name="options"]');
+    for (x in radioButtons) {
+        if (radioButtons[x].checked) { // If an option is chosen ...
+            // Get value and add to total
+            x++;
+            var opID = "op"+x;
+            var selected = document.getElementById(opID);
+            riskValTotal += selected.value;
+            id++;
+            // Go to next question
+            iterate(id);
+            break;
+        }
+    }
+    if(id==(totalQues-1)){ // If on the last question ...
+        // Hide: next button
+        next.style.display = 'none';
+        // Show: finish button
+        finish.style.display = '';
+    }
+}
 
-    // Prints an ending message in the "question" section
-    result.style.display = '';
-    const questionArea = document.getElementById('question');
-    var resultText = getResult(val);
-    questionArea.innerText = resultText;
+function finishFunc(){
+    // Evaluate last question
+    const radioButtons = document.querySelectorAll('input[name="options"]');
+    for (x in radioButtons) {
+        if (radioButtons[x].checked) {
+            x++;
+            var opID = "op"+x;
+            var selected = document.getElementById(opID);
+            riskValTotal += selected.value;
+            break;
+        }
+    }
+    var resultText = evaluateRisk(riskValTotal);
+    console.log(resultText);
+
+    // Hide: form-container, finish button
+    const form = document.getElementsByClassName('form-container');
+    form[0].style.display = 'none';
+    finish.style.display = 'none';
+    start_container[0].style.display = 'none';
+
+    // Show: end-container
+    const end = document.getElementsByClassName('end-container');
+    end[0].style.display = '';
+    const resultHeader = document.getElementById('resultHeader');
+    
+    // Edit end-container <p> to say user's results
+    resultHeader.innerText = resultText;
+    const riskScore = document.getElementById('riskScore');
+    riskScore.innerText = "Your score: "+riskValTotal;
 
     // Prints the risk value explainations
     const ex1 = document.getElementById('explain1');
@@ -213,45 +124,86 @@ function printResult(val){
     ex3.innerText = "23-28 is average/modreate risk tolerance";
     ex4.innerText = "29-32 is above-average risk tolerance";
     ex5.innerText = "33 or above is high risk tolerance (ie. aggrssive investor)";
-
-    // Prints the total risk value in the "options" section
-    const optionArea = document.getElementById('result');
-    optionArea.innerText = "Your score: "+val;
-
-    // Get rid of finish button
-    finish.style.display = 'none';
 }
 
+function restartFunc(){
+    // Set initial values again
+    id = 0;
+    riskValTotal = 0;
 
-// *** AUTOMATICALLY RUNNING WHAT IS BELOW ***
+    // Show:
+    next.style.display = '';
+    const form = document.getElementsByClassName('form-container');
+    form[0].style.display = '';
 
-// Initialize: start, length of questions (how many questions), risk total value, selected value, and result
-var start = true; // makes it run on initial boot up
-var totalQues = Questions.length;
-var riskValTotal = 0;
-var selected = 0;
-var id = 0;
-// Grab the finish + next + restart buttons, the result text, and explanation table
-const finish = document.getElementsByClassName('finish')[0];
-const restart = document.getElementsByClassName('restart')[0];
-const next = document.getElementsByClassName('next')[0];
-const result = document.getElementById('result');
-const explainTable = document.getElementById('explain');
-// Hide result text, finish button, and explanation table
-finish.style.display = 'none';
-result.style.display = 'none';
-explainTable.style.display = 'none';
+    // Hide:
+    const end = document.getElementsByClassName('end-container');
+    end[0].style.display = 'none';
+    finish.style.display = 'none';
 
-// To start on initial boot
-if (start){
+    // Start from first question
     iterate("0");
 }
 
+function iterate(id){
+    // Getting the question and setting it's text
+    const question = document.getElementById("question");
+    question.innerText = Questions[id].q;
+
+    // Grab the options
+    const op1 = document.getElementById('op1');
+    const op2 = document.getElementById('op2');
+    const op3 = document.getElementById('op3');
+    const op4 = document.getElementById('op4');
+
+    // Provide new text for options
+    op1.innerText = Questions[id].a[0].text;
+    op2.innerText = Questions[id].a[1].text;
+    op3.innerText = Questions[id].a[2].text;
+    op4.innerText = Questions[id].a[3].text;
+    // Provide new values for options
+    op1.value = Questions[id].a[0].riskVal;
+    op2.value = Questions[id].a[1].riskVal;
+    op3.value = Questions[id].a[2].riskVal;
+    op4.value = Questions[id].a[3].riskVal;
+}
+
+
+// *** AUTOMATICALLY RUNS WHAT IS BELOW***
+
+// Initialize values
+var id = 0;
+var start = true;
+var riskValTotal = 0;
+var totalQues = Questions.length;
+
+// Grab the buttons
+const finish = document.getElementById('finish');
+const restart = document.getElementById('restart');
+const next = document.getElementById('next');
+const start_container = document.getElementsByClassName('start-container');
+
+// Hide: finish button
+finish.style.display = 'none';
+
+// Initialize next button as "start"
+next.innerText = "START";
+
+// Get it started
+if (start){
+    // Hide: the form-container and end-contianer, and restart button
+    const form = document.getElementsByClassName('form-container');
+    form[0].style.display = 'none';
+    const end = document.getElementsByClassName('end-container');
+    end[0].style.display = 'none';
+    restart.style.display = 'none';
+}
+
 // When next button is clicked, advance to next question
-next.addEventListener("click", nextBut);
+next.addEventListener("click", nextFunc);
 
 // When finish button is clicked, go to last page with results
-finish.addEventListener("click", finishBut);
+finish.addEventListener("click", finishFunc);
 
 // When this button is clicked, restart quiz
-restart.addEventListener("click", restartBut);
+restart.addEventListener("click", restartFunc);
