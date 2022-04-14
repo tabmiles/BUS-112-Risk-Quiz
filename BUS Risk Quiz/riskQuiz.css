@@ -57,3 +57,8 @@
 .button:hover {
     opacity: 1
 }
+#questOfTotal{
+    margin-top: 0px;
+    text-align: center;
+    font-size: 10px;
+}
