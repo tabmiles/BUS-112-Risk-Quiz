@@ -49,14 +49,14 @@ function nextFunc(){
         start = false;
         // Hide: start-container
         start_container[0].style.display = 'none';
-        // Show option-container
+        // Show: form-container, restart button
         const form = document.getElementsByClassName('form-container');
         form[0].style.display = '';
         restart.style.display = '';
         // Update next button to say "Next"
         next.innerText = "Next";
         // Do first question
-        iterate("0");
+        iterate(0);
     }
 
     // Check to make sure an option is chosen
@@ -154,10 +154,16 @@ function restartFunc(){
     previous.style.display = 'none';
 
     // Start from first question
-    iterate("0");
+    iterate(0);
 }
 
 function iterate(id){
+    // Showing what question out of total question is current
+    const numQuestion = document.getElementById("questOfTotal");
+    numQuestion.style.display = '';
+    var currQuest = id+1;
+    numQuestion.innerText = currQuest+" of "+totalQues+" questions";
+
     // Getting the question and setting it's text
     const question = document.getElementById("question");
     question.innerText = Questions[id].q;
@@ -196,9 +202,11 @@ const restart = document.getElementById('restart');
 const next = document.getElementById('next');
 const previous = document.getElementById('previous');
 const start_container = document.getElementsByClassName('start-container');
+const numQuestion = document.getElementById("questOfTotal");
 
 // Hide: finish button
 finish.style.display = 'none';
+numQuestion.style.display = 'none';
 
 // Initialize next button as "start"
 next.innerText = "START";
