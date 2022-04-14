@@ -46,7 +46,14 @@
     padding:15px;
 }
 
-button{
+.button{
     font-size: 20px;
     font-family: monospace, sans-serif;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+.button:hover {
+    opacity: 1
 }
