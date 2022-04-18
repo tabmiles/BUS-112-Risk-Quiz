@@ -29,7 +29,6 @@ const Questions = [{
 
 function evaluateRisk(val){
     var result;
-    console.log("Passes value: "+val);
     if (val <= 18){
         result = "You have a low risk tolerance (ie. conservative investor)!";
     }else if(19 <= val && val <= 22){
