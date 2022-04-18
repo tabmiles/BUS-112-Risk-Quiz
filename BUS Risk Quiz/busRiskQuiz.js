@@ -29,13 +29,14 @@ const Questions = [{
 
 function evaluateRisk(val){
     var result;
+    console.log("Passes value: "+val);
     if (val <= 18){
         result = "You have a low risk tolerance (ie. conservative investor)!";
-    }else if(19 <= val <= 22){
+    }else if(19 <= val && val <= 22){
         result = "You have a below-average risk tolerance!";
-    }else if(23 <= val <= 28){
+    }else if(23 <= val && val <= 28){
         result = "You have an average/moderate risk tolerance!";
-    }else if(29 <= val <= 32){
+    }else if(29 <= val && val <= 32){
         result = "You have a above-average risk tolerance!";
     }else if(33 <= val){
         result = "You have a high risk tolerance (ie. aggresive investor!";
