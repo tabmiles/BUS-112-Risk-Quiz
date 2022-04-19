@@ -97,7 +97,9 @@ function nextFunc(){
 }
 
 function previousFunc(){
-    // TODO: implement
+    riskValArr.pop(); //removes from array
+    id = id -1; //to go back to previous ques
+    iterate(id)  //goes to prev q's
 }
 
 function finishFunc(){
