@@ -5,7 +5,7 @@ const Questions = [{
     a: [{ text: "A real gambler", riskVal: 4 },
         { text: "Willing to take risks after completing adequate research", riskVal: 3 },
         { text: "Cautious", riskVal: 2 },
-        { text: "A real risk avoider", riskVal: 1 }
+        { text: "A real risk avoider (1)", riskVal: 1 }
     ]
 },
 {
@@ -14,7 +14,7 @@ const Questions = [{
     a: [{ text: "This has value 18", riskVal: 18 },
         { text: "2", riskVal: 2 },
         { text: "3", riskVal: 3 },
-        { text: "4", riskVal: 4 }
+        { text: "value 1", riskVal: 1 }
     ]
 },
 {
@@ -23,31 +23,31 @@ const Questions = [{
     a: [{ text: "abc", riskVal: 1 },
         { text: "def", riskVal: 2 },
         { text: "ghi", riskVal: 3 },
-        { text: "jkl", riskVal: 4 }
+        { text: "jkl (1)", riskVal: 1 }
     ]
 }] // End of Questions
 
 function evaluateRisk(arr){
-    var val = 0;
+    var sum = 0;
     var resultArr = [];
     var i=0;
     while(i< arr.length){
-        val += arr[i];
+        sum += arr[i];
         i++;
     }
 
-    if (val <= 18){
+    if (sum <= 18){
         resultArr.push("You have a low risk tolerance (ie. conservative investor)!");
-    }else if(19 <= val && val <= 22){
+    }else if(19 <= sum && sum <= 22){
         resultArr.push("You have a below-average risk tolerance!");
-    }else if(23 <= val && val <= 28){
+    }else if(23 <= sum && sum <= 28){
         resultArr.push("You have an average/moderate risk tolerance!");
-    }else if(29 <= val && val <= 32){
+    }else if(29 <= sum && sum <= 32){
         resultArr.push("You have a above-average risk tolerance!");
-    }else if(33 <= val){
+    }else if(33 <= sum){
         resultArr.push("You have a high risk tolerance (ie. aggresive investor!");
     }
-    resultArr.push(val);
+    resultArr.push(sum);
     // Return the array of result text and value to be posted on page
     return resultArr;
 }
@@ -98,6 +98,16 @@ function nextFunc(){
 
 function previousFunc(){
     riskValArr.pop(); //removes from array
+    if(id==(totalQues-1)){ // If on the second to last question ...
+        // Hide: next button
+        next.style.display = '';
+        // Show: finish button
+        finish.style.display = 'none';
+    }
+    if(id==1){ // If on the second question ...
+        // Hide: previous button
+        previous.style.display = 'none';
+    }
     id = id -1; //to go back to previous ques
     iterate(id)  //goes to prev q's
 }
