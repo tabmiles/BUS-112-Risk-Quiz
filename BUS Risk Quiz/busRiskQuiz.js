@@ -11,7 +11,7 @@ const Questions = [{
 {
     id: 1,
     q: "Question Two",
-    a: [{ text: "1", riskVal: 1 },
+    a: [{ text: "This has value 18", riskVal: 18 },
         { text: "2", riskVal: 2 },
         { text: "3", riskVal: 3 },
         { text: "4", riskVal: 4 }
@@ -27,21 +27,29 @@ const Questions = [{
     ]
 }] // End of Questions
 
-function evaluateRisk(val){
-    var result;
-    if (val <= 18){
-        result = "You have a low risk tolerance (ie. conservative investor)!";
-    }else if(19 <= val && val <= 22){
-        result = "You have a below-average risk tolerance!";
-    }else if(23 <= val && val <= 28){
-        result = "You have an average/moderate risk tolerance!";
-    }else if(29 <= val && val <= 32){
-        result = "You have a above-average risk tolerance!";
-    }else if(33 <= val){
-        result = "You have a high risk tolerance (ie. aggresive investor!";
+function evaluateRisk(arr){
+    var val = 0;
+    var resultArr = [];
+    var i=0;
+    while(i< arr.length){
+        val += arr[i];
+        i++;
     }
-    // Return the string of result to be posted on page
-    return result;
+
+    if (val <= 18){
+        resultArr.push("You have a low risk tolerance (ie. conservative investor)!");
+    }else if(19 <= val && val <= 22){
+        resultArr.push("You have a below-average risk tolerance!");
+    }else if(23 <= val && val <= 28){
+        resultArr.push("You have an average/moderate risk tolerance!");
+    }else if(29 <= val && val <= 32){
+        resultArr.push("You have a above-average risk tolerance!");
+    }else if(33 <= val){
+        resultArr.push("You have a high risk tolerance (ie. aggresive investor!");
+    }
+    resultArr.push(val);
+    // Return the array of result text and value to be posted on page
+    return resultArr;
 }
 
 function nextFunc(){
@@ -67,7 +75,7 @@ function nextFunc(){
             x++;
             var opID = "op"+x;
             var selected = document.getElementById(opID);
-            riskValTotal += selected.value;
+            riskValArr.push(selected.value);
             id++;
             // Go to next question
             iterate(id);
@@ -100,12 +108,11 @@ function finishFunc(){
             x++;
             var opID = "op"+x;
             var selected = document.getElementById(opID);
-            riskValTotal += selected.value;
+            riskValArr.push(selected.value);
             break;
         }
     }
-    var resultText = evaluateRisk(riskValTotal);
-    console.log(resultText);
+    var resultText = evaluateRisk(riskValArr); // run the array through the funciton to get the result text/value
 
     // Hide: form-container, finish button
     const form = document.getElementsByClassName('form-container');
@@ -120,27 +127,15 @@ function finishFunc(){
     const resultHeader = document.getElementById('resultHeader');
     
     // Edit end-container <p> to say user's results
-    resultHeader.innerText = resultText;
+    resultHeader.innerText = resultText[0];
     const riskScore = document.getElementById('riskScore');
-    riskScore.innerText = "Your score: "+riskValTotal;
-
-    // Prints the risk value explainations
-    const ex1 = document.getElementById('explain1');
-    const ex2 = document.getElementById('explain2');
-    const ex3 = document.getElementById('explain3');
-    const ex4 = document.getElementById('explain4');
-    const ex5 = document.getElementById('explain5');
-    ex1.innerText = "18 or below is low risk tolerance (ie. conservative investor)";
-    ex2.innerText = "19-22 is below-average risk tolerance";
-    ex3.innerText = "23-28 is average/modreate risk tolerance";
-    ex4.innerText = "29-32 is above-average risk tolerance";
-    ex5.innerText = "33 or above is high risk tolerance (ie. aggrssive investor)";
+    riskScore.innerText = "Your score: "+resultText[1];
 }
 
 function restartFunc(){
     // Set initial values again
     id = 0;
-    riskValTotal = 0;
+    riskValArr.length = 0;
 
     // Show:
     next.style.display = '';
@@ -193,10 +188,10 @@ function iterate(id){
 // Initialize values
 var id = 0;
 var start = true;
-var riskValTotal = 0;
 var totalQues = Questions.length;
+const riskValArr = [];
 
-// Grab the buttons
+// Grab the buttons, start-container
 const finish = document.getElementById('finish');
 const restart = document.getElementById('restart');
 const next = document.getElementById('next');
