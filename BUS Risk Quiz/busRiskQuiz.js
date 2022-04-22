@@ -160,7 +160,7 @@ function nextFunc(){
             var selected = document.getElementById(opID);
             riskValArr.push(selected.value);
             id++;
-            // Unselect the radio buttons
+            // Unselect the radio buttons for next question
             for (y in radioButtons){
                 radioButtons[y].checked = false;
             }
@@ -210,6 +210,10 @@ function finishFunc(){
             riskValArr.push(selected.value);
             break;
         }
+    }
+    // Unselect the radio buttons if user goes back or restarts
+    for (y in radioButtons){
+        radioButtons[y].checked = false;
     }
     var resultText = evaluateRisk(riskValArr); // run the array through the funciton to get the result text/value
 
@@ -268,21 +272,57 @@ function iterate(id){
     const op3 = document.getElementById('op3');
     const op4 = document.getElementById('op4');
 
-    // Provide new text for options
-    op1.innerText = Questions[id].a[0].text;
-    op2.innerText = Questions[id].a[1].text;
-    op3.innerText = Questions[id].a[2].text;
-    op4.innerText = Questions[id].a[3].text;
+    // Grab last 2 radio labels in case less than 4 options
+    const radio3 = document.getElementById('3');
+    const radio4 = document.getElementById('4');
+
+    // Check to see how many options current question has
+    z = 0
+    while (z < Questions[id].a.length){
+        // Provide new text and values for current option
+        if (z==0){
+            op1.innerText = Questions[id].a[0].text;
+            op1.value = Questions[id].a[0].riskVal;
+        }else if (z==1){
+            op2.innerText = Questions[id].a[1].text;
+            op2.value = Questions[id].a[1].riskVal;
+        }else if (z==2){
+            // display 3rd option in case previous made it hide
+            op3.style.display = '';
+            radio3.style.display = '';
+            op3.innerText = Questions[id].a[2].text;
+            op3.value = Questions[id].a[2].riskVal;
+        }else if (z==3){
+            // display 4th option in case previous made it hide
+            op4.style.display = '';
+            radio4.style.display = '';
+            op4.innerText = Questions[id].a[3].text;
+            op4.value = Questions[id].a[3].riskVal;
+        }
+        z++
+    }
+    // if z never made it to the 3rd and 4th options
+    //    then there are no 3rd/4th options so hide them
+    if (z==2){
+        radio3.style.display = 'none';
+        radio4.style.display = 'none';
+        op3.style.display = 'none';
+        op3.value = 0;
+        op4.style.display = 'none';
+        op4.value = 0;
+    }
+    // if z never made it to the 4th option
+    //    then there is no 4th option so hide it
+    if (z==3){
+        radio4.style.display = 'none';
+        op4.style.display = 'none';
+        op4.value = 0;
+    }
     
-    // Provide new values for options
-    op1.value = Questions[id].a[0].riskVal;
-    op2.value = Questions[id].a[1].riskVal;
-    op3.value = Questions[id].a[2].riskVal;
-    op4.value = Questions[id].a[3].riskVal;
 }
 
 
-// *** AUTOMATICALLY RUNS WHAT IS BELOW***
+// *** FILE AUTOMATICALLY RUNS WHAT IS BELOW ***
 
 // Initialize values
 var id = 0;
