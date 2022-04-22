@@ -5,25 +5,108 @@ const Questions = [{
     a: [{ text: "A real gambler", riskVal: 4 },
         { text: "Willing to take risks after completing adequate research", riskVal: 3 },
         { text: "Cautious", riskVal: 2 },
-        { text: "A real risk avoider (1)", riskVal: 1 }
+        { text: "A real risk avoider", riskVal: 1 }
     ]
 },
 {
     id: 1,
-    q: "Question Two",
-    a: [{ text: "This has value 18", riskVal: 18 },
-        { text: "2", riskVal: 2 },
-        { text: "3", riskVal: 3 },
-        { text: "value 1", riskVal: 1 }
+    q: "You are on a TV game show and can choose one of the following. Which would you take?",
+    a: [{ text: "$1,000 in cash", riskVal: 1 },
+        { text: "A 50% chance at winning %5,000", riskVal: 2 },
+        { text: "A 25% chance at winning $10,000", riskVal: 3 },
+        { text: "A 5% chance at winning $100,000", riskVal: 4 }
     ]
 },
 {
     id: 2,
-    q: "Question Three",
-    a: [{ text: "abc", riskVal: 1 },
-        { text: "def", riskVal: 2 },
-        { text: "ghi", riskVal: 3 },
-        { text: "jkl (1)", riskVal: 1 }
+    q: "You have just finished saving for a 'once-in-a-lifetime' vacation. Three weeks before you plan to leave, you lose your job. You would:",
+    a: [{ text: "Cancel the vacation", riskVal: 1 },
+        { text: "Take a much more modest vacation", riskVal: 2 },
+        { text: "Go as scheduled, reasoning that you need the time to prepare for a job search", riskVal: 3 },
+        { text: "Extend your vacation because this might be your last chance to go first-class", riskVal: 4 }
+    ]
+},
+{
+    id: 3,
+    q: "If you unexpectedly reveived $20,000 to invest, what would you do?",
+    a: [{ text: "Deposit it in a bank account, money market account, or an insured CD", riskVal: 1 },
+        { text: "Invest it in a safe high quality bond or mutual funds", riskVal: 2 },
+        { text: "Invest it in stocks or stock mutual funds", riskVal: 3 }
+    ]
+},
+{
+    id: 4,
+    q: "In terms of experience, how comfortable are you investing in stocks or stock mutual funds?",
+    a: [{ text: "Not at all comfortable", riskVal: 1 },
+        { text: "Somewhat comfortable", riskVal: 2 },
+        { text: "Very comfortable", riskVal: 3 }
+    ]
+},
+{
+    id: 5,
+    q: "When you think of the word 'risk' which of the following words comes to mind first?",
+    a: [{ text: "Loss", riskVal: 1 },
+        { text: "Uncertainty", riskVal: 2 },
+        { text: "Opportunity", riskVal: 3 },
+        { text: "Thrill", riskVal: 4 }
+    ]
+},
+{
+    id: 6,
+    q: "Some experts are predicting prices of assets such as gold, jewels, collectibles, and real estate (hard assets) to increase in value; bond prices may fall, however, experts tend to agree that government bonds are relatively safe. Most of your investment assets are now in high interest government bonds. What would you do?",
+    a: [{ text: "Hold the bonds", riskVal: 1 },
+        { text: "Sell the bonds, put half the proceeds into money market accounts, and the other half into hard assets", riskVal: 2 },
+        { text: "Sell the bonds and put the total proceeds into hard assets", riskVal: 3 },
+        { text: "Sell the bonds, put all the money into hard assets, and borrow additional money to buy more", riskVal: 4 }
+    ]
+},
+{
+    id: 7,
+    q: "Given the best and worst case returns of the four investment choices below, which would you prefer?",
+    a: [{ text: "$200 gain best case; $0 loss worst case", riskVal: 1 },
+        { text: "$800 gain best case; $200 loss worst case", riskVal: 2 },
+        { text: "$2,600 gain best case; $800 loss worst case", riskVal: 3 },
+        { text: "$4,800 gain best case; $2,400 loss worst case", riskVal: 4 }
+    ]
+},
+{
+    id: 8,
+    q: "In addition to whatever you own, you have been given $1,000. You are now asked to choose between:",
+    a: [{ text: "A sure gain of $500", riskVal: 1 },
+        { text: "A 50% chance to gain $1,000 and a 50% chance to gain nothing", riskVal: 3 }
+    ]
+},
+{
+    id: 9,
+    q: "In addition to whatever you own, you have been given $2,000. You are now asked to choose between:",
+    a: [{ text: "A sure loss of $500", riskVal: 1 },
+        { text: "A 50% chance to lose $1,000 and a 50% chance to lose nothing", riskVal: 3 }
+    ]
+},
+{
+    id: 10,
+    q: "Suppose a relative left you an inheritance of $100,000, stipulating in the will that you invest all the money in one of the following choices. Which would you select?",
+    a: [{ text: "A savings account or money market mutual fund", riskVal: 1 },
+        { text: "A mutual fund that owns stock and bonds", riskVal: 2 },
+        { text: "A portfolio of 15 common stocks", riskVal: 3 },
+        { text: "Commodities like gold, silver, and oil", riskVal: 4 }
+    ]
+},
+{
+    id: 11,
+    q: "If you had to invest $20,000, which of the following investment choices would you find most appealing?",
+    a: [{ text: "60% in low-risk investments, 30% in medium-risk investments, 10% in high-risk investments", riskVal: 1 },
+        { text: "30% in low-risk investments, 40% in medium-risk investments, 30% in high-risk investments", riskVal: 2 },
+        { text: "10% in low-risk investments, 40% in medium-risk investments, 50% in high-risk investments", riskVal: 3 }
+    ]
+},
+{
+    id: 12,
+    q: "Your trusted friend and neighbor, and experienced geologist, is putting together a group of investors to fund an exploratory gold mining venture. The venture could pay back 50 to 100 times the investment if successful. If the mine is a bust, the enture investment is worthless. Your friend estimates the chance of success is only 20%. If you had the money, how much would you invest?",
+    a: [{ text: "Nothing", riskVal: 1 },
+        { text: "One month's salary", riskVal: 2 },
+        { text: "Three month's salary", riskVal: 3 },
+        { text: "Six month's salary", riskVal: 4 }
     ]
 }] // End of Questions
 
