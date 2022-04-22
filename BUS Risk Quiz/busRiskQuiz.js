@@ -160,6 +160,10 @@ function nextFunc(){
             var selected = document.getElementById(opID);
             riskValArr.push(selected.value);
             id++;
+            // Unselect the radio buttons
+            for (y in radioButtons){
+                radioButtons[y].checked = false;
+            }
             // Go to next question
             iterate(id);
             break;
