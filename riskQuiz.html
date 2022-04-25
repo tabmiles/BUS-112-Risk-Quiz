@@ -2,49 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BUS 112 Risk Quiz</title>
-    <link rel="stylesheet" href="riskQuiz.css"> <!--CSS file access here-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <title>BUS 112 Risk Quiz 2</title>
+    <link rel="stylesheet" href="riskQuiz.css"> <!-- CSS file access here-->
 </head>
 <body>
-   
-    <div class="container mt-sm-5 my-1">
-        <h1 class="text-center">BUS 112 Risk Quiz</h1>
-        <div class="question ml-sm-5 pl-sm-5 pt-2">
-            <div class="py-2 h5"><b>Q. 1?</b></div>
-            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options">A <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">B<input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">C <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">D <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
-        </div>
-        
-        <div class="question ml-sm-5 pl-sm-5 pt-2">
-            <div class="py-2 h5"><b>Q. 2?</b></div>
-            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options">A <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">B<input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">C <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">D <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
-        </div>
+    <!--Contains the starting screne-->
+    <div class = "start-container">
+        <p class="header">BUS 112 Risk Tolerance Assesment</p>
+    </div> <!--End start-container-->
 
-        <div class="question ml-sm-5 pl-sm-5 pt-2">
-            <div class="py-2 h5"><b>Q. 3?</b></div>
-            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options">A <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">B<input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">C <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">D <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
-        </div>
+    <!--Contains the ending/result screne-->
+    <div class = "end-container">
+        <u><p class="header" id="resultHeader">RESULT HERE</p></u>
+        <b><p class="line" id="riskScore"></p></b>
+        <p class="line" id="explain1"></p>
+        <p class="line" id="explain2"></p>
+        <p class="line" id="explain3"></p>
+        <p class="line" id="explain4"></p>
+        <p class="line" id="explain5"></p>
+    </div> <!--End end-container-->
 
-        <div class="question ml-sm-5 pl-sm-5 pt-2">
-            <div class="py-2 h5"><b>Q. 4?</b></div>
-            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options">A <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">B<input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">C <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">D <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
-        </div>
+    <!--Contains the question and answer options-->
+    <div class = "form-container">
+        <b><p class="line" id="questOfTotal">_ question of _</p></b>
+        <p class = "header" id="question">QUESTION</p>
+        <form>
+            <input type="radio" name = "options" id="1" value="">
+            <label for="1" class = "line" id="op1">OPTION 1</label><br>
+            <input type="radio" name = "options" id="2" value="">
+            <label for="2" class = "line" id="op2">OPTION 2</label><br>
+            <input type="radio" name = "options" id="3" value="">
+            <label for="3" class = "line" id="op3">OPTION 3</label><br>
+            <input type="radio" name = "options" id="4" value="">
+            <label for="4" class = "line" id="op4">OPTION 4</label><br>
+        </form>
+    </div> <!--End form-container-->
 
-        <div class="question ml-sm-5 pl-sm-5 pt-2">
-            <div class="py-2 h5"><b>Q. 5?</b></div>
-            <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> <label class="options">A <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">B<input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">C <input type="radio" name="radio"> <span class="checkmark"></span> </label> <label class="options">D <input type="radio" name="radio"> <span class="checkmark"></span> </label> </div>
-        </div>
-        
-        <div class="d-flex align-items-center pt-3">
-            
-            <input class="btn btn-primary" type="reset" value="Reset">
-            <div class="ml-auto mr-sm-5"> <input class="btn btn-primary" type="submit" value="Submit"></div>
-        </div>
-    </div>
+    <!--Contains the navigation buttons-->
+    <div class="navigation-container">
+        <button id="restart" class = "button">Restart</button>
+        <button id="previous" class = "button">Previous</button>
+        <button id="next" class = "button">Next</button>
+        <button id="finish" class = "button">Finish</button>
+    </div> <!--End navigation-container-->
 
-    
     <script src="busRiskQuiz.js"></script> <!--Javascript file accessed here-->
 </body>
 </html>
