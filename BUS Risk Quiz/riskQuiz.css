@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    font-family: Verdana, sans-serif;
+}
+
+.start-container{
+    overflow: auto;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    padding:15px;
+    background-color: rgb(190, 230, 255);
+}
+
+.end-container{
+    overflow: auto;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    padding:15px;
+    background-color: rgb(190, 230, 255);
+}
+
+.line{
+    font-size: 20px;
+    padding: 5px;
+}
+
+.header{
+    font-size: 25px;
+    text-align: center;
+    grid-row: 1;
+    font-weight: bold;
+    font-family: Georgia, serif;
+}
+
+.form-container{
+    overflow: auto;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    padding:15px;
+    background-color: rgb(190, 230, 255);
+}
+
+.navigation-container{
+    text-align: center;
+    overflow: auto;
+    padding:15px;
+}
+
+.button{
+    font-size: 20px;
+    font-family: monospace, sans-serif;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+.button:hover {
+    opacity: 1
+}
+#questOfTotal{
+    margin-top: 0px;
+    text-align: center;
+    font-size: 10px;
+}
