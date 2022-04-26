@@ -128,7 +128,7 @@ function evaluateRisk(arr){
     }else if(29 <= sum && sum <= 32){
         resultArr.push("You have a above-average risk tolerance!");
     }else if(33 <= sum){
-        resultArr.push("You have a high risk tolerance (ie. aggresive investor!");
+        resultArr.push("You have a high risk tolerance (ie. aggresive investor)!");
     }
     resultArr.push(sum);
     // Return the array of result text and value to be posted on page
