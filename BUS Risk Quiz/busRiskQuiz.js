@@ -12,7 +12,7 @@ const Questions = [{
     id: 1,
     q: "You are on a TV game show and can choose one of the following. Which would you take?",
     a: [{ text: "$1,000 in cash", riskVal: 1 },
-        { text: "A 50% chance at winning %5,000", riskVal: 2 },
+        { text: "A 50% chance at winning $5,000", riskVal: 2 },
         { text: "A 25% chance at winning $10,000", riskVal: 3 },
         { text: "A 5% chance at winning $100,000", riskVal: 4 }
     ]
@@ -128,7 +128,7 @@ function evaluateRisk(arr){
     }else if(29 <= sum && sum <= 32){
         resultArr.push("You have a above-average risk tolerance!");
     }else if(33 <= sum){
-        resultArr.push("You have a high risk tolerance (ie. aggresive investor)!");
+        resultArr.push("You have a high risk tolerance (ie. aggresive investor!");
     }
     resultArr.push(sum);
     // Return the array of result text and value to be posted on page
